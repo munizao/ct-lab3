@@ -9,7 +9,8 @@ const {
 jest.mock('fs', () => ({
   promises: {
     mkdir: jest.fn(() => Promise.resolve()),
-    writeFile: jest.fn(() => Promise.resolve())
+    writeFile: jest.fn(() => Promise.resolve()),
+    readFile: jest.fn(() => Promise.resolve()),
   }
 }));
 
@@ -30,7 +31,7 @@ describe ('fsfuncs module', () => {
   });
 
   it('reads a file with a JSON string to an object', () => {
-    const obj = readJSON('obj.json')
+    readJSON('obj.json')
     .then(expect(fs.readFile).toHaveBeenCalledWith('obj.json'));
   });
 });
