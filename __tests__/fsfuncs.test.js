@@ -15,5 +15,14 @@ describe ('fsfuncs module', () => {
     return mkdirp('some/nested/dirs')
       .then(expect(fs.mkdir).toHaveBeenCalledWith('some/nested/dirs', { recursive: true }));
   });
+
+  it('writes JSON to files', () => {
+    const obj = {
+      name: 'frodo'
+      age: 33
+    };
+    return writeJSON('out.json', obj)
+      .then(expect(fs.writeFile).toHaveBeenCalledWith('out.json', 'FIGURETHISOUT'))
+  });
 });
 
