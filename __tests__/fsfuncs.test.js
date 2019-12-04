@@ -1,16 +1,19 @@
+const fs = require('fs').promises;
+
 const {
   mkdirp
 } = require('../lib/fsfuncs.js');
 
-const mockfs = {
-  mkdir: jest.fn()
-};
-
-jest.mock('fs', () => mockfs);
+jest.mock('fs', () => ({
+  promises: {
+    mkdir: jest.fn(() => Promise.resolve())
+  }
+}));
 
 describe ('fsfuncs module', () => {
   it('makes nested directories', () => {
     return mkdirp('some/nested/dirs')
-      .then(expect(mockfs.mkdir).toHaveBeenCalledWith('some/nested/dirs', { recursive: true }));
+      .then(expect(fs.mkdir).toHaveBeenCalledWith('some/nested/dirs', { recursive: true }));
   });
 });
+
