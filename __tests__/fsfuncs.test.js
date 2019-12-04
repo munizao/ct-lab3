@@ -3,7 +3,8 @@ const fs = require('fs').promises;
 const {
   mkdirp,
   writeJSON,
-  readJSON
+  readJSON,
+  readDirectoryJSON
 } = require('../lib/fsfuncs.js');
 
 jest.mock('fs', () => ({
@@ -11,6 +12,7 @@ jest.mock('fs', () => ({
     mkdir: jest.fn(() => Promise.resolve()),
     writeFile: jest.fn(() => Promise.resolve()),
     readFile: jest.fn(() => Promise.resolve()),
+    readDir: jest.fn(() => [Promise.resolve(), Promise.resolve(), Promise.resolve()])
   }
 }));
 
@@ -32,7 +34,13 @@ describe ('fsfuncs module', () => {
 
   it('reads a file with a JSON string to an object', () => {
     readJSON('obj.json')
-    .then(expect(fs.readFile).toHaveBeenCalledWith('obj.json'));
+      .then(expect(fs.readFile).toHaveBeenCalledWith('obj.json'));
+  });
+
+  it('reads all files in a dir into an array of objects', () => {
+    readDirectoryJSON('dir')
+      .then(expect(fs.readdir).toHaveBeenCalledWith('dir'))
+      .then(expect(fs.readFile).toHaveBeenCalledTimes(3));
   });
 });
 
