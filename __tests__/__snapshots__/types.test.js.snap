@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validator module casters throws error if value is not castable to array 1`] = `"Cannot cast >>3<< to Array"`;
+
+exports[`validator module casters throws error if value is not castable to array 2`] = `"Cannot cast >>true<< to Array"`;
+
+exports[`validator module casters throws error if value is not castable to function 1`] = `"Cannot cast >>3<< to Function"`;
+
+exports[`validator module casters throws error if value is not castable to function 2`] = `"Cannot cast >>true<< to Function"`;
+
+exports[`validator module casters throws error if value is not castable to number 1`] = `"Cannot cast >>hi<< to Number"`;
+
+exports[`validator module casters throws error if value is not castable to number 2`] = `"Cannot cast >><< to Number"`;
+
+exports[`validator module casters throws error if value is not castable to number 3`] = `"Cannot cast >>[object Object]<< to Number"`;
+
+exports[`validator module casters throws error if value is not castable to object 1`] = `"Cannot cast >>3<< to Object"`;
+
+exports[`validator module casters throws error if value is not castable to object 2`] = `"Cannot cast >>true<< to Object"`;

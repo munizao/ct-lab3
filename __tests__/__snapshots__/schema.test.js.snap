@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schema class module correctly validates a schema 1`] = `"Cannot cast >>1,2,3,4<< to Number"`;

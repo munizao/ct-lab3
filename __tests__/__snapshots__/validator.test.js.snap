@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validator class module properly validates 1`] = `"Cannot cast >>30<< to Array"`;
+
+exports[`validator class module properly validates 2`] = `"required field is missing"`;
+
+exports[`validator class module properly validates 3`] = `"Cannot cast >>1,2,3,4<< to Number"`;
