@@ -4,7 +4,7 @@ const {
 
 const {
   Schema
-} = require('../lib/schema.js')
+} = require('../lib/schema.js');
 
 describe ('model class module', () => {
   const dogSchema = new Schema({
