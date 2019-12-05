@@ -14,7 +14,8 @@ jest.mock('fs', () => ({
     mkdir: jest.fn(() => Promise.resolve()),
     writeFile: jest.fn(() => Promise.resolve()),
     readFile: jest.fn(() => Promise.resolve(JSON.stringify({ name: 'frodo', age: 33 }))),
-    readdir: jest.fn(() => Promise.resolve(['one', 'two', 'three']))
+    readdir: jest.fn(() => Promise.resolve(['one', 'two', 'three'])),
+    unlink: jest.fn(() => Promise.resolve()),
   }
 }));
 
@@ -23,6 +24,10 @@ describe ('fsfuncs module', () => {
     name: 'frodo',
     age: 33
   };
+  //suggested in lecture
+  beforeEach(() => {
+    jest.resetAllMocks;
+  });
 
   it('makes nested directories', () => {
     return mkdirp('some/nested/dirs')
