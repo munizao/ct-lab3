@@ -1,3 +1,7 @@
+const {
+  Model
+} = require('../lib/model.js');
+
 describe ('model class module', () => {
   const dogSchema = new Schema({
     name: {
