@@ -5,7 +5,8 @@ const {
   writeJSON,
   readJSON,
   readDirectoryJSON,
-  updateJSON
+  updateJSON,
+  deleteFile
 } = require('../lib/fsfuncs.js');
 
 jest.mock('fs', () => ({
