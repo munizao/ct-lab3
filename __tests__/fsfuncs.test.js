@@ -4,7 +4,8 @@ const {
   mkdirp,
   writeJSON,
   readJSON,
-  readDirectoryJSON
+  readDirectoryJSON,
+  updateJSON
 } = require('../lib/fsfuncs.js');
 
 jest.mock('fs', () => ({
@@ -17,18 +18,19 @@ jest.mock('fs', () => ({
 }));
 
 describe ('fsfuncs module', () => {
+  const exampleObj = {
+    name: 'frodo',
+    age: 33
+  }
+
   it('makes nested directories', () => {
     return mkdirp('some/nested/dirs')
       .then(expect(fs.mkdir).toHaveBeenCalledWith('some/nested/dirs', { recursive: true }));
   });
 
   it('writes an obect as JSON to a file', () => {
-    const obj = {
-      name: 'frodo',
-      age: 33
-    };
-    const json = JSON.stringify(obj);
-    return writeJSON('out.json', obj)
+    const json = JSON.stringify(exampleObj);
+    return writeJSON('out.json', exampleObj)
       .then(expect(fs.writeFile).toHaveBeenCalledWith('out.json', json));
   });
 
@@ -41,6 +43,21 @@ describe ('fsfuncs module', () => {
     Promise.all(readDirectoryJSON('dir'))
       .then(expect(fs.readdir).toHaveBeenCalledWith('dir') && 
         expect(fs.readFile).toHaveBeenCalledTimes(3));
+  });
+
+  it('updates a JSON file', () => {
+    patchObj = {
+      weight: '10 lb'
+    };
+
+    patchedObj = {
+      name: 'frodo',
+      age: 33,
+      weight: '10 lb'
+    };
+    const patchedJson = JSON.stringify(patchedObj);
+    return updateJSON('out.json', obj)
+      .then(expect(fs.writeFile).toHaveBeenCalledWith('out.json', patchedJson));
   });
 });
 
