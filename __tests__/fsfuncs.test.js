@@ -11,8 +11,8 @@ jest.mock('fs', () => ({
   promises: {
     mkdir: jest.fn(() => Promise.resolve()),
     writeFile: jest.fn(() => Promise.resolve()),
-    readFile: jest.fn(() => Promise.resolve()),
-    readDir: jest.fn(() => [Promise.resolve(), Promise.resolve(), Promise.resolve()])
+    readFile: jest.fn(() => Promise.resolve(JSON.stringify({name: 'frodo', age: 33}))),
+    readdir: jest.fn(() => Promise.resolve(['one', 'two', 'three']))
   }
 }));
 
@@ -38,9 +38,9 @@ describe ('fsfuncs module', () => {
   });
 
   it('reads all files in a dir into an array of objects', () => {
-    readDirectoryJSON('dir')
-      .then(expect(fs.readdir).toHaveBeenCalledWith('dir'))
-      .then(expect(fs.readFile).toHaveBeenCalledTimes(3));
+    Promise.all(readDirectoryJSON('dir'))
+      .then(expect(fs.readdir).toHaveBeenCalledWith('dir') && 
+        expect(fs.readFile).toHaveBeenCalledTimes(3));
   });
 });
 
