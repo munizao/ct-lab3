@@ -1,4 +1,4 @@
-describe ('validator class module', () => {
+describe ('model class module', () => {
   const dogSchema = new Schema({
     name: {
       type: String,
