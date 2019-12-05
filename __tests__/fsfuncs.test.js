@@ -12,7 +12,7 @@ jest.mock('fs', () => ({
   promises: {
     mkdir: jest.fn(() => Promise.resolve()),
     writeFile: jest.fn(() => Promise.resolve()),
-    readFile: jest.fn(() => Promise.resolve(JSON.stringify({name: 'frodo', age: 33}))),
+    readFile: jest.fn(() => Promise.resolve(JSON.stringify({ name: 'frodo', age: 33 }))),
     readdir: jest.fn(() => Promise.resolve(['one', 'two', 'three']))
   }
 }));
@@ -21,7 +21,7 @@ describe ('fsfuncs module', () => {
   const exampleObj = {
     name: 'frodo',
     age: 33
-  }
+  };
 
   it('makes nested directories', () => {
     return mkdirp('some/nested/dirs')
@@ -46,17 +46,17 @@ describe ('fsfuncs module', () => {
   });
 
   it('updates a JSON file', () => {
-    patchObj = {
+    const patchObj = {
       weight: '10 lb'
     };
 
-    patchedObj = {
+    const patchedObj = {
       name: 'frodo',
       age: 33,
       weight: '10 lb'
     };
     const patchedJson = JSON.stringify(patchedObj);
-    return updateJSON('out.json', obj)
+    return updateJSON('out.json', patchObj)
       .then(expect(fs.writeFile).toHaveBeenCalledWith('out.json', patchedJson));
   });
 });
