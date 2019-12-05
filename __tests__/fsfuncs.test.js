@@ -61,5 +61,12 @@ describe ('fsfuncs module', () => {
         expect(fs.writeFile).toHaveBeenCalledWith('out.json', patchedJson);
       });
   });
+
+  it ('deletes a file', () => {
+    return deleteFile('deleted.txt')
+      .then(() => {
+        expect(fs.unlink).toHaveBeenCalledWith('deleted.txt');
+      });
+  });
 });
 
